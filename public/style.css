@@ -1,0 +1,173 @@
+/* styles */
+/* called by your view template */
+
+/* You might want to try something fancier: */
+/* less: http://lesscss.org/ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family:  helvetica, arial, sans-serif;
+  margin: 25px;
+  display:flex;
+  flex-direction:column;
+  
+  align-items:center;
+  background: linear-gradient(to bottom, #000046,
+#1cb5e0 );
+  background-size:150% 150%;
+  color:white;
+}
+
+h1 {
+  font-family: "Bungee Shade";
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 0 grey;
+}
+h1:before{
+content: "Short URL Microservice";
+  position:absolute;
+  transform:rotateX(180deg) translateY(-1em) scaleY(0.3);
+  filter:blur(5px) drop-shadow(18px 8px 2px white) contrast(200%);
+  
+  
+}
+
+.bold {
+  font-weight: bold;
+}
+
+p {
+  max-width: 600px;
+}
+
+form ,.url{
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: #69c;
+  
+  width: 75vmin;
+  box-shadow: 0 0 1px 3px  #369,0  5px 1px  #000;
+  border-radius: 3px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  
+}
+.url {
+  align-items:center;
+
+}
+.w100 {width:100%}
+
+input {
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  font-size: 16px;
+  transition: 1s;
+}
+input:hover {
+  border: 1px solid grey;
+
+}
+button {
+  font-size: 16px;
+  border-radius: 3px;
+  background-color: lightgrey;
+  border: 1px solid grey;
+  box-shadow: 2px 2px teal;
+  cursor: pointer;
+  
+}
+
+button:hover {
+  background-color: dodgerblue;
+  color:white;
+}
+
+button:active {
+  box-shadow: none;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+footer {
+  margin-top: 50px;
+  padding-top: 25px;
+  border-top: 1px solid lightgrey;
+  display:flex;
+ justify-content: space-around;
+  
+  width:90vw;
+}
+footer > div {display:flex;justify-content: space-between; }
+footer > a {
+  color: #BBBBBB;
+}
+
+ 
+
+   .animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+
+      
+
+        @keyframes slideInLeft {
+            from {
+                transform: translate3d(-100%, 0, 0);
+                visibility: visible;
+            }
+            to {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .slideInLeft {
+            animation-name: slideInLeft;
+        }
+
+        
+
+       
+       
+        @keyframes bounce {
+            from,
+            20%,
+            53%,
+            80%,
+            to {
+                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+                transform: translate3d(0, 0, 0);
+            }
+
+            40%,
+            43% {
+                animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                transform: translate3d(0, -30px, 0);
+            }
+
+            70% {
+                animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+                transform: translate3d(0, -15px, 0);
+            }
+
+            90% {
+                transform: translate3d(0, -4px, 0);
+            }
+        }
+
+        .bounce {
+            animation-name: bounce;
+            transform-origin: center bottom;
+        }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Short URL Microservice</title>
+    <meta name="description" content="Short URL Microservice">
+    <link id="favicon" rel="icon" href="/bbx.svg" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet"> 
+  </head>
+  <body>
+    <header {% if anim %} class="animated slideInRight" {% endif %} >
+      <h1>
+        Short URL Microservice
+      </h1>
+    </header>
+  
+    <main {% if anim %} class="animated slideInLeft" {% endif %} >
+      <p>Enter an URL to be shortened:</p>
+      <form id="frmshorten" action="/new/" method="get">
+        <input type="url" id="url" name="url" placeholder="http://www.example.com/">
+        <button type="submit" >
+          Shorten your URL
+        </button>
+      </form>
+ </main>
+      <section >
+       
+          {% if noresults %} This URL was not found. Maybe create a new one?  {% endif %} 
+        
+        {% if shorturl %}
+         <div class="url">
+       
+  <div>     {{ longurl }}</div>
+        <div  class="w100">
+          <input type="text" id="shorturl" value="{{ shorturl }}"><button id="copy" >Copy To Clipboard</button>
+           </div>
+          
+          
+          </div>
+{% endif %}
+        
+      </section>
+   
+
+    <footer>
+      <div  {% if anim %} class="animated b#ounce" {% endif %} >
+        Made by &nbsp;<a href="https://codepen.io/bbx"><img src="/bbx.svg" width="64" ></a>
+      </div>
+      <div>
+        Follow me on&nbsp;<a href="https://codepen.io/bbx"> codepen</a>.
+        </div>
+    </footer>
+<script>
+  document.getElementById("frmshorten").onsubmit = prevent;
+  function prevent() {
+    if (   document.getElementById("url").value==="")    return false;
+  }
+  
+  document.getElementById("copy").onclick = cpClip;
+  function cpClip() {
+    document.getElementById("shorturl").select();
+    document.execCommand("Copy");
+    return false;
+  } 
+    </script>
+    
+
+  </body>
+</html>
