@@ -1,5 +1,3 @@
-Welcome to bbx-url 
+Welcome to BBX-URL
 ==================
-
-
 
