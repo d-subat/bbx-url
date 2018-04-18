@@ -4,21 +4,24 @@
 /* You might want to try something fancier: */
 /* less: http://lesscss.org/ */
 
-* {
-  box-sizing: border-box;
+html {
+  background: linear-gradient(to bottom, #000046,
+#1cb5e0 );
+ 
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
   font-family:  helvetica, arial, sans-serif;
-  margin: 25px;
+ 
   display:flex;
   flex-direction:column;
-  
-  align-items:center;
-  background: linear-gradient(to bottom, #000046,
-#1cb5e0 );
-  background-size:150% 150%;
+  align-items:center;  
   color:white;
+  margin:0;
+  height:100vmin;
 }
 
 h1 {
@@ -43,21 +46,31 @@ content: "Short URL Microservice";
 p {
   max-width: 600px;
 }
+main {
+width:100%;
+  height: 100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;  
+  justify-content:center;
+}
 
 form ,.url{
   margin-bottom: 25px;
-  padding: 15px;
-  background-color: #69c;
+  padding: 15px ;
   
-  width: 75vmin;
-  box-shadow: 0 0 1px 3px  #369,0  5px 1px  #000;
+  
+  width: 100%;
+  
   border-radius: 3px;
   display:flex;
   flex-direction:column;
-  align-items:flex-end;
+  align-items:center;
   
 }
 .url {
+  box-shadow: 0 0 1px 3px  #369,0  5px 1px  #000;
+  background-color: #69c;
   align-items:center;
 
 }
@@ -67,7 +80,9 @@ input {
   display: block;
   margin-bottom: 10px;
   padding: 5px;
-  width: 100%;
+  text-indent: 5px;
+  width: 95%;
+  height: 5vmin;
   border: 1px solid lightgrey;
   border-radius: 3px;
   font-size: 16px;
@@ -79,12 +94,13 @@ input:hover {
 }
 button {
   font-size: 16px;
+  padding:5px;
   border-radius: 3px;
   background-color: lightgrey;
   border: 1px solid grey;
   box-shadow: 2px 2px teal;
   cursor: pointer;
-  
+   
 }
 
 button:hover {
@@ -101,23 +117,24 @@ li {
 }
 
 footer {
-  margin-top: 50px;
-  padding-top: 25px;
+  
   border-top: 1px solid lightgrey;
   display:flex;
  justify-content: space-around;
-  
-  width:90vw;
+  align-items:center;
+  height: 10vmin;
+  width:95vw;
 }
 footer > div {display:flex;justify-content: space-between; }
-footer > a {
-  color: #BBBBBB;
+footer > div > a {
+  text-decoration:none;
+  color: #222;
 }
 
- 
+.alert {color:orange; font-weight:bold;text-shadow: 1px 1px 0 black;}
 
    .animated {
-            animation-duration: 1s;
+            animation-duration: 0.3s;
             animation-fill-mode: both;
         }
 

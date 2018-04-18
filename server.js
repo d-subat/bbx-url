@@ -5,13 +5,14 @@ const mongo = require('mongodb');
 const MONGODB_URI = 'mongodb://' + process.env.USER + ':' + process.env.PASS + '@' + process.env.HOST + ':' + process.env.DB_PORT + '/' + process.env.DB;
 let collection;
 let connected = false;
+app.use(express.static('public'))
 
 template.configure('views', {
     autoescape: true,
     express: app
 });
 
-app.use(express.static('public'))
+
 
 app.route("/").get(function (request, response) {
     try {
@@ -20,6 +21,15 @@ app.route("/").get(function (request, response) {
             'index.html', {
                 anim: "1"
             })
+    } catch (err) {
+        handleError(err, response);
+    }
+})
+app.route("/api").get(function (request, response) {
+    try {
+        var request = request.params.request;
+        response.render(
+            'api.html')
     } catch (err) {
         handleError(err, response);
     }
@@ -34,6 +44,10 @@ app.route("/new/").get(function (request, response) {
         }
         mongo.connect(MONGODB_URI, function (err, client) {
             var collection = client.collection(process.env.COLLECTION)
+            collection.find({original_url: url}, { _id: 0, short_url: 1,original_url: 1 }).toArray(function(err, result) {
+            if (err) {throw err;}
+              
+            if (result.length===0) {
             collection.insert(doc, function (err, data) {
                 if (err) throw err
                 response.render('index.html', {
@@ -42,12 +56,53 @@ app.route("/new/").get(function (request, response) {
                 });
                 client.close()
             })
-
+            } else {
+              response.render('index.html', {
+                    exists: "1",
+                    longurl:  request.query.url,
+                    shorturl: result[0].short_url
+                });
+            }
+               });
         });
+        
     } catch (err) {
         handleError(err, response);
     }
 })
+
+app.route("/api/new/:uri").get(function (request, response) {
+    try {
+        var url = request.params.uri
+        var doc = {
+            original_url: url,
+            short_url: getRandomID()
+        } 
+             mongo.connect(MONGODB_URI, function (err, client) {
+            var collection = client.collection(process.env.COLLECTION)
+            collection.find({original_url: url}, { _id: 0, short_url: 1,original_url: 1 }).toArray(function(err, result) {
+            if (err) {throw err;}
+              
+            if (result.length===0) {
+            collection.insert(doc, function (err, data) {
+                if (err) throw err
+                delete doc._id;
+                response.send(doc)
+                client.close()
+            })
+            } else {
+              delete doc._id;
+                response.send(result[0]);
+            }
+               });
+        });
+      
+    } catch (err) {
+        handleError(err, response);
+    }
+})
+
+ 
 
 app.route('/:uri')
     .get(function (request, response) {
@@ -65,8 +120,9 @@ app.route('/:uri')
                         response.render('index.html', {
                             noresults: "1"
                         });
-                    }
+                    } else {
                     response.redirect(doc[0].original_url);
+                    }
                 })
                 db.close();
             })

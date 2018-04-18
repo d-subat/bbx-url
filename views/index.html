@@ -11,28 +11,27 @@
     <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet"> 
   </head>
   <body>
-    <header {% if anim %} class="animated slideInRight" {% endif %} >
+    <header {% if anim %} class="animated bounce" {% endif %} >
       <h1>
         Short URL Microservice
       </h1>
     </header>
   
-    <main {% if anim %} class="animated slideInLeft" {% endif %} >
-      <p>Enter an URL to be shortened:</p>
+    <main >      
       <form id="frmshorten" action="/new/" method="get">
-        <input type="url" id="url" name="url" placeholder="http://www.example.com/">
+        <input type="url" id="url" name="url" placeholder="Enter an URL to be shortened: http://www.example.com/">
         <button type="submit" >
           Shorten your URL
         </button>
       </form>
- </main>
+ 
       <section >
        
-          {% if noresults %} This URL was not found. Maybe create a new one?  {% endif %} 
+          {% if noresults %} This Short-URL was not found. Do you want to create a new one?  {% endif %} 
         
         {% if shorturl %}
          <div class="url">
-       
+       {% if exists %} <span class="alert">This URL already exists: </span>{% endif %}
   <div>     {{ longurl }}</div>
         <div  class="w100">
           <input type="text" id="shorturl" value="{{ shorturl }}"><button id="copy" >Copy To Clipboard</button>
@@ -43,20 +42,22 @@
 {% endif %}
         
       </section>
-   
+ </main>  
 
     <footer>
       <div  {% if anim %} class="animated b#ounce" {% endif %} >
-        Made by &nbsp;<a href="https://codepen.io/bbx"><img src="/bbx.svg" width="64" ></a>
+        <a href="/api">API</a>
       </div>
       <div>
-        Follow me on&nbsp;<a href="https://codepen.io/bbx"> codepen</a>.
+        Made by &nbsp;<a href="https://codepen.io/bbx"><img src="/bbx.svg" width="64" ></a>&nbsp;Follow me on&nbsp;<a href="https://codepen.io/bbx">codepen</a>
         </div>
     </footer>
 <script>
   document.getElementById("frmshorten").onsubmit = prevent;
   function prevent() {
-    if (   document.getElementById("url").value==="")    return false;
+    if (   document.getElementById("url").value==="")  { 
+      alert("Impossible improbable hyperfield detected.");
+      return false;}
   }
   
   document.getElementById("copy").onclick = cpClip;
